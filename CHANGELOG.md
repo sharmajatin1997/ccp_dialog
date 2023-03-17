@@ -1,3 +1,3 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* Flexible Ccp dialog for getting Country code, Calling code, isoCode and Currency.

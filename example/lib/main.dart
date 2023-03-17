@@ -1,4 +1,4 @@
-import 'package:country_picker_dialog/country_picker/flutter_country_picker.dart';
+import 'package:ccp_dialog/country_picker/flutter_country_picker.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onChanged: (value) {
                         ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content:Text("${value.dialingCode}"),
+                              content:Text(value.dialingCode),
                               duration: const Duration(seconds: 2),
                             ));
                       }),
