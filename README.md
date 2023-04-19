@@ -114,16 +114,24 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ## Using Getx
 Example:-
-
+```
   Rx<Country> selectedCountry = Country.IN.obs;
+```
+  
+```
   var countryCode = "+91".obs;
+```  
   
-  updateCountry(Country country) {
-    selectedCountry.value = country;
-    countryCode.value = "+" + country.dialingCode.toString();
+```
+  updateCountry(Country country)
+  {
+      selectedCountry.value = country;
+      countryCode.value = "+" + country.dialingCode.toString();
   }
-  
-  Obx(() => CountryPicker(
+  ```
+```  
+  Obx(
+  () => CountryPicker(
   selectedCountry: _controller.selectedCountry.value,
   dense: false,
   showFlag: true,
@@ -131,9 +139,10 @@ Example:-
   showName: false,
   showCurrency: false,                                         
   showCurrencyISO: false,
-  onChanged: _controller.updateCountry),
+  onChanged: _controller.updateCountry
+  ),
  )
-
+```
 ![Simulator Screen Shot - iPhone 8 - 2023-03-17 at 10 14 39](https://user-images.githubusercontent.com/80152469/225814739-b6c0686b-a9c3-44ed-ae4f-c6bd7b453b8b.png)
 ![Simulator Screen Shot - iPhone 8 - 2023-03-17 at 10 14 41](https://user-images.githubusercontent.com/80152469/225814744-d40b02a3-e92e-471b-a22e-3d94ae727ee6.png)
 
