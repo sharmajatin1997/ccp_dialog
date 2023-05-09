@@ -1,7 +1,7 @@
 <h1 align="center">Flutter CCP dialog</h1>
 
 ## Features
-Flexible CCP dialog for getting Country code, Calling code, isoCode and Currency.
+Flexible CCP dialog for getting Country code, Calling code, isoCode and Currency in Dialog and Bottom sheet.
 
 <br>
 ## Installation
@@ -61,6 +61,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String countryCode ="+91";
+  Country selectedCountry = Country.IN;
+
+  _updateCountry(Country country){
+    selectedCountry = country;
+    countryCode = "+${country.dialingCode}";
+    setState(() {
+
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,25 +93,23 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                  CountryPicker(
-                      selectedCountry: Country.IN,
+                   CountryPicker(
+                      selectedCountry: selectedCountry,
                       dense: false,
                       showFlag: true,
+
                       //displays flag, true by default
                       showDialingCode: true,
                       //displays dialing code, false by default
                       showName: false,
+                      withBottomSheet: true,
                       //displays country name, true by default
                       showCurrency: false,
                       //eg. 'British pound'
                       showCurrencyISO: false,
-                      onChanged: (value) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content:Text("${value.dialingCode}"),
-                              duration: const Duration(seconds: 2),
-                            ));
-                      }),
+                      onChanged:_updateCountry
+                   ),
+
                 ]))
           ],
         ),
@@ -109,7 +117,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
 ```
 
 ## Using Getx
@@ -146,6 +153,5 @@ Example:-
 ![Simulator Screen Shot - iPhone 8 - 2023-03-17 at 10 14 39](https://user-images.githubusercontent.com/80152469/225814739-b6c0686b-a9c3-44ed-ae4f-c6bd7b453b8b.png)
 ![Simulator Screen Shot - iPhone 8 - 2023-03-17 at 10 14 41](https://user-images.githubusercontent.com/80152469/225814744-d40b02a3-e92e-471b-a22e-3d94ae727ee6.png)
 
-https://user-images.githubusercontent.com/80152469/225814416-c74fef6a-f988-48d1-91e1-995f241f707d.mp4
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

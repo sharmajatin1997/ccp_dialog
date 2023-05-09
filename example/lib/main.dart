@@ -34,17 +34,6 @@ class _MyHomePageState extends State<MyHomePage> {
   String countryCode ="+91";
   Country selectedCountry = Country.IN;
 
-
-  /*
-  *   Rx<Country> selectedCountry = Country.IN.obs;
-  var countryCode = "+91".obs;
-  updateCountry(Country country)
-  {
-      selectedCountry.value = country;
-      countryCode.value = "+" + country.dialingCode.toString();
-  }
-  * */
-
   _updateCountry(Country country){
     selectedCountry = country;
     countryCode = "+${country.dialingCode}";

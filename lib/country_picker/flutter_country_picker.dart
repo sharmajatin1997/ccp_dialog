@@ -59,11 +59,6 @@ class CountryPicker extends StatelessWidget {
 
           if(isNationality)
             Text(displayCountry.asset,style: const TextStyle(fontSize: 24),),
-            // Image.asset(
-            //   displayCountry.asset,
-            //   height: 24.0,
-            //   fit: BoxFit.fitWidth,
-            // ),
           if (showName )
             Expanded(
               child: Text(
@@ -212,7 +207,6 @@ class _CountryPickerDialog extends StatefulWidget {
 class _CountryPickerDialogState extends State<_CountryPickerDialog> {
 
   TextEditingController controller = TextEditingController();
-  final ScrollController _controller = ScrollController();
   String filter = "";
   late List<Country> countries;
   bool? withDialog;
