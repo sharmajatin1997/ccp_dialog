@@ -22,11 +22,13 @@ class CountryPicker extends StatelessWidget {
     this.currencyTextStyle,
     this.currencyISOTextStyle,
     this.isNationality = false,
+    this.withBottomSheet=false,
   }) : super(key: key);
 
   final Country selectedCountry;
   final ValueChanged<Country> onChanged;
   final bool dense;
+  final bool withBottomSheet;
   final bool showFlag;
   final bool showDialingCode;
   final bool showName;
@@ -93,7 +95,12 @@ class CountryPicker extends StatelessWidget {
         ],
       ),
       onTap: () {
-        _selectCountry(context, displayCountry);
+        if(withBottomSheet){
+          _selectCountryWithBottomSheet(context, displayCountry);
+        }else{
+          _selectCountry(context, displayCountry);
+        }
+
       },
     );
   }
@@ -112,7 +119,13 @@ class CountryPicker extends StatelessWidget {
         ],
       ),
       onTap: () {
-        _selectCountry(context, displayCountry);
+        if(withBottomSheet){
+          _selectCountryWithBottomSheet(context,displayCountry);
+
+        }else{
+          _selectCountry(context, displayCountry);
+        }
+
       },
     );
   }
@@ -126,6 +139,18 @@ class CountryPicker extends StatelessWidget {
 
     if (picked != null && picked != selectedCountry) onChanged(picked);
   }
+
+  Future<void> _selectCountryWithBottomSheet(
+      BuildContext context, Country defaultCountry) async {
+    final Country? picked = await showBottomSheet(
+      context: context,
+      defaultCountry: defaultCountry,
+      withBottomSheet: withBottomSheet,
+    );
+
+    if (picked != null && picked != selectedCountry) onChanged(picked);
+  }
+
 }
 
 Future<Country?> showCountryPicker({
@@ -139,14 +164,45 @@ Future<Country?> showCountryPicker({
     barrierDismissible: true,
     builder: (BuildContext context) => _CountryPickerDialog(
       defaultCountry: defaultCountry,
+      withBottomSheet: false,
     ),
   );
 }
 
+
+
+
+Future<Country?> showBottomSheet({
+  required BuildContext context,
+  required Country defaultCountry,
+  required bool withBottomSheet,
+}) async {
+  assert(Country.findByIsoCode(defaultCountry.isoCode) != null);
+
+  return await  showModalBottomSheet<Country>(
+    context: context,
+    backgroundColor: Colors.white,
+    isScrollControlled: true,
+
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+    isDismissible: true,
+    builder: (context) {
+      return _CountryPickerDialog(
+        defaultCountry: defaultCountry,
+        withBottomSheet: withBottomSheet,
+      );
+    }
+  );
+}
+
 class _CountryPickerDialog extends StatefulWidget {
-  const _CountryPickerDialog({
+  bool withBottomSheet;
+   _CountryPickerDialog({
     Key? key,
     Country? defaultCountry,
+     required this.withBottomSheet,
   }) : super(key: key);
 
   @override
@@ -156,15 +212,15 @@ class _CountryPickerDialog extends StatefulWidget {
 class _CountryPickerDialogState extends State<_CountryPickerDialog> {
 
   TextEditingController controller = TextEditingController();
+  final ScrollController _controller = ScrollController();
   String filter = "";
   late List<Country> countries;
+  bool? withDialog;
 
   @override
   void initState() {
     super.initState();
-
     countries = Country.ALL;
-
     controller.addListener(() {
       setState(() {
         filter = controller.text;
@@ -180,8 +236,16 @@ class _CountryPickerDialogState extends State<_CountryPickerDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      height:widget.withBottomSheet? MediaQuery.of(context).size.height/1.5:MediaQuery.of(context).size.height,
       child: Dialog(
+        shape:  RoundedRectangleBorder(
+          borderRadius:  widget.withBottomSheet? const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)):BorderRadius.circular(10),
+        ),
+        insetPadding: widget.withBottomSheet? EdgeInsets.zero:const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
         child: Column(
           children: <Widget>[
             TextField(
@@ -203,43 +267,41 @@ class _CountryPickerDialogState extends State<_CountryPickerDialog> {
               controller: controller,
             ),
             Expanded(
-              child: Scrollbar(
-                child: ListView.builder(
-                  itemCount: countries.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    Country country = countries[index];
-                    if (filter == "" ||
-                        country.name
-                            .toLowerCase()
-                            .contains(filter.toLowerCase()) ||
-                        country.isoCode.contains(filter)) {
-                      return InkWell(
-                        child: ListTile(
-                          trailing: Text(" ${country.dialingCode}"),
-                          title: Row(
-                            children: <Widget>[
-                              Text(country.asset,style: const TextStyle(fontSize: 24),),
-                              Expanded(
-                                child: Container(
-                                  margin: const EdgeInsets.only(left: 8.0),
-                                  child: Text(
-                                    country.name,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
+              child: ListView.builder(
+                itemCount: countries.length,
+                itemBuilder: (BuildContext context, int index) {
+                  Country country = countries[index];
+                  if (filter == "" ||
+                      country.name
+                          .toLowerCase()
+                          .contains(filter.toLowerCase()) ||
+                      country.isoCode.contains(filter)) {
+                    return InkWell(
+                      child: ListTile(
+                        trailing: Text(" ${country.dialingCode}"),
+                        title: Row(
+                          children: <Widget>[
+                            Text(country.asset,style: const TextStyle(fontSize: 24),),
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(left: 8.0),
+                                child: Text(
+                                  country.name,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        onTap: () {
-                          Navigator.pop(context, country);
-                        },
-                      );
-                    }
-                    return Container();
-                  },
-                ),
+                      ),
+                      onTap: () {
+                        Navigator.pop(context, country);
+                      },
+                    );
+                  }
+                  return Container();
+                },
               ),
             ),
           ],

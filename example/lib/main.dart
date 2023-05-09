@@ -31,6 +31,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String countryCode ="+91";
+  Country selectedCountry = Country.IN;
+
+
+  /*
+  *   Rx<Country> selectedCountry = Country.IN.obs;
+  var countryCode = "+91".obs;
+  updateCountry(Country country)
+  {
+      selectedCountry.value = country;
+      countryCode.value = "+" + country.dialingCode.toString();
+  }
+  * */
+
+  _updateCountry(Country country){
+    selectedCountry = country;
+    countryCode = "+${country.dialingCode}";
+    setState(() {
+
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,25 +74,23 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                  CountryPicker(
-                      selectedCountry: Country.IN,
+                   CountryPicker(
+                      selectedCountry: selectedCountry,
                       dense: false,
                       showFlag: true,
+
                       //displays flag, true by default
                       showDialingCode: true,
                       //displays dialing code, false by default
                       showName: false,
+                      withBottomSheet: true,
                       //displays country name, true by default
                       showCurrency: false,
                       //eg. 'British pound'
                       showCurrencyISO: false,
-                      onChanged: (value) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content:Text(value.dialingCode),
-                              duration: const Duration(seconds: 2),
-                            ));
-                      }),
+                      onChanged:_updateCountry
+                   ),
+
                 ]))
           ],
         ),
