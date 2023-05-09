@@ -124,11 +124,9 @@ Example:-
 ```
   Rx<Country> selectedCountry = Country.IN.obs;
 ```
-  
 ```
   var countryCode = "+91".obs;
-```  
-  
+```
 ```
   updateCountry(Country country)
   {
