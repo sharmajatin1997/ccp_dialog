@@ -152,9 +152,9 @@ Example:-
   ),
  )
 ```
-![simulator_screenshot_68BE39BB-9733-4E34-9228-7DB3CF8D1C34](https://github.com/sharmajatin1997/ccp_dialog/assets/80152469/f953d9ff-008c-4419-9e3![simulator_screenshot_7![Simulator Screen Shot - iPhone 14 - 2023-05-31 at 15 09 16](https://github.com/sharmajatin1997/ccp_dialog/assets/80152469/4b7d51f8-c873-49f7-9912-df7fb4df6b86)
-756FB0F-3298-4553-861E-6F618A9450B0](https://github.com/sharmajatin1997/ccp_dialog/assets/80152469/3d6bac1e-86d4-45ff-910e-30f4541ae4a5)
-9-922b031a1404)
+![simulator_screenshot_24795F01-DE84-46B5-977D-C23CED7D1EE1](https://github.com/sharmajatin1997/ccp_dialog/assets/80152469/6266ea8e-5cbe-4d69-bbed-e1e03fbef67a)
+
+
 
 
 ## Contributing
