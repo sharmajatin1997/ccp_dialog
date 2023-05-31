@@ -152,8 +152,7 @@ Example:-
   ),
  )
 ```
-![Simulator Screen Shot - iPhone 8 - 2023-03-17 at 10 14 39](https://user-images.githubusercontent.com/80152469/225814739-b6c0686b-a9c3-44ed-ae4f-c6bd7b453b8b.png)
-![Simulator Screen Shot - iPhone 8 - 2023-03-17 at 10 14 41](https://user-images.githubusercontent.com/80152469/225814744-d40b02a3-e92e-471b-a22e-3d94ae727ee6.png)
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
