@@ -11,7 +11,8 @@ class CountryPicker extends StatelessWidget {
     Key? key,
     required this.selectedCountry,
     required this.onChanged,
-    this.dense = false,
+    this.dense = true,
+    this.showLine = false,
     this.showFlag = true,
     this.showDialingCode = false,
     this.showName = true,
@@ -30,6 +31,7 @@ class CountryPicker extends StatelessWidget {
   final bool dense;
   final bool withBottomSheet;
   final bool showFlag;
+  final bool showLine;
   final bool showDialingCode;
   final bool showName;
   final bool showCurrency;
@@ -44,8 +46,9 @@ class CountryPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterial(context));
     Country displayCountry = selectedCountry;
+    bool showFlagAsset=showFlag;
     return dense
-        ? _renderDenseDisplay(context, displayCountry)
+        ? _renderDenseDisplay(context, displayCountry,showFlagAsset)
         : _renderDefaultDisplay(context, displayCountry);
   }
 
@@ -56,7 +59,6 @@ class CountryPicker extends StatelessWidget {
         children: <Widget>[
           if (showFlag)
             Text(displayCountry.asset,style: const TextStyle(fontSize: 32),),
-
           if(isNationality)
             Text(displayCountry.asset,style: const TextStyle(fontSize: 24),),
           if (showName )
@@ -81,6 +83,7 @@ class CountryPicker extends StatelessWidget {
               " ${displayCountry.currencyISO}",
               style: currencyISOTextStyle,
             ),
+          if(showLine)
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 6),
             width: 0.5,
@@ -100,13 +103,16 @@ class CountryPicker extends StatelessWidget {
     );
   }
 
-  _renderDenseDisplay(BuildContext context, Country displayCountry) {
+  _renderDenseDisplay(BuildContext context, Country displayCountry, bool showFlagAsset) {
     return InkWell(
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(displayCountry.asset,style: const TextStyle(fontSize: 24.0),),
+          Visibility(
+            visible:showFlagAsset==true ,
+            child: Text(displayCountry.asset,style: const TextStyle(fontSize: 24.0))),
+          Text(displayCountry.dialingCode,style: dialingCodeTextStyle),
           Icon(Icons.arrow_drop_down,
               color: Theme.of(context).brightness == Brightness.light
                   ? Colors.grey.shade700
