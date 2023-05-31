@@ -154,8 +154,9 @@ Example:-
 ```
 ![simulator_screenshot_24795F01-DE84-46B5-977D-C23CED7D1EE1](https://github.com/sharmajatin1997/ccp_dialog/assets/80152469/6266ea8e-5cbe-4d69-bbed-e1e03fbef67a)
 
+![Simulator Screen Shot - iPhone 14 - 2023-05-31 at 15 11 38](https://github.com/sharmajatin1997/ccp_dialog/assets/80152469/46d7e2d9-a34f-47a5-9732-1b8a6da04260)
 
-
+![Simulator Screen Shot - iPhone 14 - 2023-05-31 at 15 12 12](https://github.com/sharmajatin1997/ccp_dialog/assets/80152469/3256cfe3-7503-48f7-abc4-1322e4c955c8)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
