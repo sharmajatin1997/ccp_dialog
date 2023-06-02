@@ -4,7 +4,7 @@
 Flexible CCP dialog for getting Country code, Calling code, isoCode and Currency in Dialog and Bottom sheet.
 
 <br>
-## Installation
+# Installation
 
 1. Add the latest version of package to your pubspec.yaml (and dart pub get):
 
