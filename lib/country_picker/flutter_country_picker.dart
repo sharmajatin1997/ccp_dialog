@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'country.dart';
 export 'country.dart';
 
-
 /// The country picker widget exposes an dialog to select a country from a
 /// pre defined list, see [Country.ALL]
 class CountryPicker extends StatelessWidget {
@@ -23,7 +22,7 @@ class CountryPicker extends StatelessWidget {
     this.currencyTextStyle,
     this.currencyISOTextStyle,
     this.isNationality = false,
-    this.withBottomSheet=false,
+    this.withBottomSheet = false,
   }) : super(key: key);
 
   final Country selectedCountry;
@@ -46,9 +45,9 @@ class CountryPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterial(context));
     Country displayCountry = selectedCountry;
-    bool showFlagAsset=showFlag;
+    bool showFlagAsset = showFlag;
     return dense
-        ? _renderDenseDisplay(context, displayCountry,showFlagAsset)
+        ? _renderDenseDisplay(context, displayCountry, showFlagAsset)
         : _renderDefaultDisplay(context, displayCountry);
   }
 
@@ -58,10 +57,16 @@ class CountryPicker extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           if (showFlag)
-            Text(displayCountry.asset,style: const TextStyle(fontSize: 32),),
-          if(isNationality)
-            Text(displayCountry.asset,style: const TextStyle(fontSize: 24),),
-          if (showName )
+            Text(
+              displayCountry.asset,
+              style: const TextStyle(fontSize: 32),
+            ),
+          if (isNationality)
+            Text(
+              displayCountry.asset,
+              style: const TextStyle(fontSize: 24),
+            ),
+          if (showName)
             Expanded(
               child: Text(
                 " ${displayCountry.name}",
@@ -83,36 +88,37 @@ class CountryPicker extends StatelessWidget {
               " ${displayCountry.currencyISO}",
               style: currencyISOTextStyle,
             ),
-          if(showLine)
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 6),
-            width: 0.5,
-            height: double.infinity,
-            color: Colors.grey.withOpacity(0.5),
-          )
+          if (showLine)
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 6),
+              width: 0.5,
+              height: double.infinity,
+              color: Colors.grey.withOpacity(0.5),
+            )
         ],
       ),
       onTap: () {
-        if(withBottomSheet){
+        if (withBottomSheet) {
           _selectCountryWithBottomSheet(context, displayCountry);
-        }else{
+        } else {
           _selectCountry(context, displayCountry);
         }
-
       },
     );
   }
 
-  _renderDenseDisplay(BuildContext context, Country displayCountry, bool showFlagAsset) {
+  _renderDenseDisplay(
+      BuildContext context, Country displayCountry, bool showFlagAsset) {
     return InkWell(
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Visibility(
-            visible:showFlagAsset==true ,
-            child: Text(displayCountry.asset,style: const TextStyle(fontSize: 24.0))),
-          Text(displayCountry.dialingCode,style: dialingCodeTextStyle),
+              visible: showFlagAsset == true,
+              child: Text(displayCountry.asset,
+                  style: const TextStyle(fontSize: 24.0))),
+          Text(displayCountry.dialingCode, style: dialingCodeTextStyle),
           Icon(Icons.arrow_drop_down,
               color: Theme.of(context).brightness == Brightness.light
                   ? Colors.grey.shade700
@@ -120,13 +126,11 @@ class CountryPicker extends StatelessWidget {
         ],
       ),
       onTap: () {
-        if(withBottomSheet){
-          _selectCountryWithBottomSheet(context,displayCountry);
-
-        }else{
+        if (withBottomSheet) {
+          _selectCountryWithBottomSheet(context, displayCountry);
+        } else {
           _selectCountry(context, displayCountry);
         }
-
       },
     );
   }
@@ -151,7 +155,6 @@ class CountryPicker extends StatelessWidget {
 
     if (picked != null && picked != selectedCountry) onChanged(picked);
   }
-
 }
 
 Future<Country?> showCountryPicker({
@@ -170,9 +173,6 @@ Future<Country?> showCountryPicker({
   );
 }
 
-
-
-
 Future<Country?> showBottomSheet({
   required BuildContext context,
   required Country defaultCountry,
@@ -180,30 +180,28 @@ Future<Country?> showBottomSheet({
 }) async {
   assert(Country.findByIsoCode(defaultCountry.isoCode) != null);
 
-  return await  showModalBottomSheet<Country>(
-    context: context,
-    backgroundColor: Colors.white,
-    isScrollControlled: true,
-
+  return await showModalBottomSheet<Country>(
+      context: context,
+      backgroundColor: Colors.white,
+      isScrollControlled: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
-    isDismissible: true,
-    builder: (context) {
-      return _CountryPickerDialog(
-        defaultCountry: defaultCountry,
-        withBottomSheet: withBottomSheet,
-      );
-    }
-  );
+      isDismissible: true,
+      builder: (context) {
+        return _CountryPickerDialog(
+          defaultCountry: defaultCountry,
+          withBottomSheet: withBottomSheet,
+        );
+      });
 }
 
 class _CountryPickerDialog extends StatefulWidget {
   bool withBottomSheet;
-   _CountryPickerDialog({
+  _CountryPickerDialog({
     Key? key,
     Country? defaultCountry,
-     required this.withBottomSheet,
+    required this.withBottomSheet,
   }) : super(key: key);
 
   @override
@@ -211,7 +209,6 @@ class _CountryPickerDialog extends StatefulWidget {
 }
 
 class _CountryPickerDialogState extends State<_CountryPickerDialog> {
-
   TextEditingController controller = TextEditingController();
   String filter = "";
   late List<Country> countries;
@@ -236,72 +233,111 @@ class _CountryPickerDialogState extends State<_CountryPickerDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      height:widget.withBottomSheet? MediaQuery.of(context).size.height/1.5:MediaQuery.of(context).size.height,
-      child: Dialog(
-        shape:  RoundedRectangleBorder(
-          borderRadius:  widget.withBottomSheet? const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)):BorderRadius.circular(10),
+    return Material(
+      color: Colors.transparent,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
         ),
-        insetPadding: widget.withBottomSheet? EdgeInsets.zero:const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
-        child: Column(
-          children: <Widget>[
-            TextField(
-              decoration: InputDecoration(
-                hintText: MaterialLocalizations.of(context).searchFieldLabel,
-                prefixIcon: const Icon(Icons.search),
-                suffixIcon: filter == ""
-                    ? const SizedBox(
-                  height: 0.0,
-                  width: 0.0,
-                )
-                    : InkWell(
-                  child: const Icon(Icons.clear),
-                  onTap: () {
-                    controller.clear();
-                  },
-                ),
+        height: widget.withBottomSheet
+            ? MediaQuery.of(context).size.height / 1.5
+            : MediaQuery.of(context).size.height,
+        child: Stack(
+          children: [
+            Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: widget.withBottomSheet
+                    ? const BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10))
+                    : BorderRadius.circular(10),
               ),
-              controller: controller,
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: countries.length,
-                itemBuilder: (BuildContext context, int index) {
-                  Country country = countries[index];
-                  if (filter == "" ||
-                      country.name
-                          .toLowerCase()
-                          .contains(filter.toLowerCase()) ||
-                      country.isoCode.contains(filter)) {
-                    return InkWell(
-                      child: ListTile(
-                        trailing: Text(" ${country.dialingCode}"),
-                        title: Row(
-                          children: <Widget>[
-                            Text(country.asset,style: const TextStyle(fontSize: 24),),
-                            Expanded(
-                              child: Container(
-                                margin: const EdgeInsets.only(left: 8.0),
-                                child: Text(
-                                  country.name,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
+              insetPadding: widget.withBottomSheet
+                  ? EdgeInsets.zero
+                  : const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 30.0),
+              child: Column(
+                children: <Widget>[
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText:
+                          MaterialLocalizations.of(context).searchFieldLabel,
+                      prefixIcon: const Icon(Icons.search),
+                      suffixIcon: filter == ""
+                          ? const SizedBox(
+                              height: 0.0,
+                              width: 0.0,
+                            )
+                          : InkWell(
+                              child: const Icon(Icons.clear),
+                              onTap: () {
+                                controller.clear();
+                              },
+                            ),
+                    ),
+                    controller: controller,
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: countries.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        Country country = countries[index];
+                        if (filter == "" ||
+                            country.name
+                                .toLowerCase()
+                                .contains(filter.toLowerCase()) ||
+                            country.isoCode.contains(filter)) {
+                          return InkWell(
+                            child: ListTile(
+                              trailing: Text(" ${country.dialingCode}"),
+                              title: Row(
+                                children: <Widget>[
+                                  Text(
+                                    country.asset,
+                                    style: const TextStyle(fontSize: 20),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      margin: const EdgeInsets.only(left: 8.0),
+                                      child: Text(
+                                        country.name,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.pop(context, country);
+                            onTap: () {
+                              Navigator.pop(context, country);
+                            },
+                          );
+                        }
+                        return Container();
                       },
-                    );
-                  }
-                  return Container();
-                },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Visibility(
+              visible: !widget.withBottomSheet,
+              child: Positioned(
+                top: 15,
+                right: 10,
+                child: GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100)),
+                    child: const Icon(
+                      Icons.cancel,
+                      size: 24,
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
               ),
             ),
           ],

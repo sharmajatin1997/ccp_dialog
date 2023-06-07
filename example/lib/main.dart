@@ -31,16 +31,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String countryCode ="+91";
+  String countryCode = "+91";
   Country selectedCountry = Country.IN;
 
-  _updateCountry(Country country){
+  _updateCountry(Country country) {
     selectedCountry = country;
     countryCode = "+${country.dialingCode}";
-    setState(() {
-
-    });
+    setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,34 +55,35 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
                 height: 45,
-                 width: MediaQuery.of(context).size.width/2,
+                width: MediaQuery.of(context).size.width / 2,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     color: Colors.white),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                   CountryPicker(
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  CountryPicker(
                       selectedCountry: selectedCountry,
-                      dense: true ,
-                       //displays arrow, true by default
-                      showLine: true,
-                       //displays line, false by default If dense true Line not show
+                      dense: true,
+                      //displays arrow, true by default
+                      showLine: false,
+                      //displays line, false by default If dense true Line not show
                       showFlag: false,
-                       //displays flag, true by default
-                      dialingCodeTextStyle:const TextStyle(fontSize: 18),
+                      //displays flag, true by default
+                      dialingCodeTextStyle: const TextStyle(fontSize: 18),
                       showDialingCode: true,
                       //displays dialing code, false by default
                       showName: false,
-                       //displays Name, true by default
-                      withBottomSheet: true,
+                      //displays Name, true by default
+                      withBottomSheet: false,
                       //displays country name, true by default
                       showCurrency: false,
                       //eg. 'British pound'
                       showCurrencyISO: false,
-                      onChanged:_updateCountry
-                   ),
-                   const Text('9876541230',style: TextStyle(fontSize: 20),),
+                      onChanged: _updateCountry),
+                  const Text(
+                    '9876541230',
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ]))
           ],
         ),
