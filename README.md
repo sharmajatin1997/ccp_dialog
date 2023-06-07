@@ -1,10 +1,10 @@
 <h1 align="center">Flutter CCP dialog</h1>
 
 ## Features
-Flexible CCP dialog for getting Country code, Calling code, isoCode and Currency.
+Flexible CCP dialog for getting Country code, Calling code, isoCode and Currency in Dialog and Bottom sheet.
 
 <br>
-## Installation
+# Installation
 
 1. Add the latest version of package to your pubspec.yaml (and dart pub get):
 
@@ -61,6 +61,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String countryCode ="+91";
+  Country selectedCountry = Country.IN;
+
+  _updateCountry(Country country){
+    selectedCountry = country;
+    countryCode = "+${country.dialingCode}";
+    setState(() {
+
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,32 +86,34 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
                 height: 45,
-                width: MediaQuery.of(context).size.width,
+                 width: MediaQuery.of(context).size.width/2,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     color: Colors.white),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                  CountryPicker(
-                      selectedCountry: Country.IN,
-                      dense: false,
-                      showFlag: true,
-                      //displays flag, true by default
+                   CountryPicker(
+                      selectedCountry: selectedCountry,
+                      dense: true ,
+                       //displays arrow, true by default
+                      showLine: true,
+                       //displays line, false by default If dense true Line not show
+                      showFlag: false,
+                       //displays flag, true by default
+                      dialingCodeTextStyle:const TextStyle(fontSize: 18),
                       showDialingCode: true,
                       //displays dialing code, false by default
                       showName: false,
+                       //displays Name, true by default
+                      withBottomSheet: true,
                       //displays country name, true by default
                       showCurrency: false,
                       //eg. 'British pound'
                       showCurrencyISO: false,
-                      onChanged: (value) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content:Text("${value.dialingCode}"),
-                              duration: const Duration(seconds: 2),
-                            ));
-                      }),
+                      onChanged:_updateCountry
+                   ),
+                   const Text('9876541230',style: TextStyle(fontSize: 20),),
                 ]))
           ],
         ),
@@ -109,7 +121,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
 ```
 
 ## Using Getx
@@ -117,11 +128,9 @@ Example:-
 ```
   Rx<Country> selectedCountry = Country.IN.obs;
 ```
-  
 ```
   var countryCode = "+91".obs;
-```  
-  
+```
 ```
   updateCountry(Country country)
   {
@@ -143,9 +152,11 @@ Example:-
   ),
  )
 ```
-![Simulator Screen Shot - iPhone 8 - 2023-03-17 at 10 14 39](https://user-images.githubusercontent.com/80152469/225814739-b6c0686b-a9c3-44ed-ae4f-c6bd7b453b8b.png)
-![Simulator Screen Shot - iPhone 8 - 2023-03-17 at 10 14 41](https://user-images.githubusercontent.com/80152469/225814744-d40b02a3-e92e-471b-a22e-3d94ae727ee6.png)
+![simulator_screenshot_24795F01-DE84-46B5-977D-C23CED7D1EE1](https://github.com/sharmajatin1997/ccp_dialog/assets/80152469/6266ea8e-5cbe-4d69-bbed-e1e03fbef67a)
 
-https://user-images.githubusercontent.com/80152469/225814416-c74fef6a-f988-48d1-91e1-995f241f707d.mp4
+![Simulator Screen Shot - iPhone 14 - 2023-05-31 at 15 11 38](https://github.com/sharmajatin1997/ccp_dialog/assets/80152469/46d7e2d9-a34f-47a5-9732-1b8a6da04260)
+
+![Simulator Screen Shot - iPhone 14 - 2023-05-31 at 15 12 12](https://github.com/sharmajatin1997/ccp_dialog/assets/80152469/3256cfe3-7503-48f7-abc4-1322e4c955c8)
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
