@@ -1,3 +1,3 @@
-## 0.0.4
+## 0.0.6
 
-* Flexible Ccp dialog for getting Country code, Calling code, isoCode and Currency in Dialog and Bottom sheet.
+* Bug Fixes and Add Get Default Country method in Readme.
