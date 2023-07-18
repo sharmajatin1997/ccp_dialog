@@ -152,6 +152,21 @@ Example:-
   ),
  )
 ```
+
+## How to get Default Country
+
+```
+
+Country? country =  await getCountryByCountryCode(Get.context!, '+91');
+
+Future<Country?> getCountryByCountryCode(BuildContext context, String countryCode) async {
+const list = Country.ALL;
+return list.firstWhere((element) => element.dialingCode == countryCode);
+}
+
+```
+
+
 ![simulator_screenshot_24795F01-DE84-46B5-977D-C23CED7D1EE1](https://github.com/sharmajatin1997/ccp_dialog/assets/80152469/6266ea8e-5cbe-4d69-bbed-e1e03fbef67a)
 
 ![Simulator Screen Shot - iPhone 14 - 2023-05-31 at 15 11 38](https://github.com/sharmajatin1997/ccp_dialog/assets/80152469/46d7e2d9-a34f-47a5-9732-1b8a6da04260)
