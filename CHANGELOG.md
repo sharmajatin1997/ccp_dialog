@@ -1,3 +1,3 @@
-## 0.0.6
+## 0.0.7
 
-* Bug Fixes and Add Get Default Country method in Readme.
+* Bug Fixes.
