@@ -56,7 +56,6 @@ class Country {
     currency: "Helena Pound",
     currencyISO: "SHP",
   );
-
   static const Country AD = Country(
     asset: "🇦🇩",
     dialingCode: "+376",
@@ -2305,18 +2304,17 @@ class Country {
 
   /// returns a country with the specified [isoCode] or ```null``` if
   /// none or more than 1 are found
-  static findByIsoCode(String isoCode) {
+  static findCountryByIsoCode(String isoCode) {
     return ALL.singleWhere(
           (item) => item.isoCode.toLowerCase() == isoCode.toLowerCase(),
     );
   }
 
-  static findByCountryCode(String? countryCode) {
+  static findCountryByCountryCode(String? countryCode) {
     return ALL.singleWhere(
           (item) => item.dialingCode.toLowerCase() == countryCode!.toLowerCase(),
     );
   }
-
 
   /// Creates a copy with modified values
   Country copyWith({

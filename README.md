@@ -156,14 +156,12 @@ Example:-
 ## How to get Default Country
 
 ```
-
 Country? country =  await getCountryByCountryCode(Get.context!, '+91');
 
 Future<Country?> getCountryByCountryCode(BuildContext context, String countryCode) async {
 const list = Country.ALL;
 return list.firstWhere((element) => element.dialingCode == countryCode);
 }
-
 ```
 
 

@@ -1,3 +1,3 @@
-## 0.0.7
+## 0.0.8
 
-* Bug Fixes.
+* Bug Fixes and Add 2 methods to find Default Country using countryCode or isoCode.

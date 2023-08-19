@@ -161,7 +161,7 @@ Future<Country?> showCountryPicker({
   required BuildContext context,
   required Country defaultCountry,
 }) async {
-  assert(Country.findByIsoCode(defaultCountry.isoCode) != null);
+  assert(Country.findCountryByIsoCode(defaultCountry.isoCode) != null);
 
   return await showDialog<Country>(
     context: context,
@@ -178,7 +178,7 @@ Future<Country?> showBottomSheet({
   required Country defaultCountry,
   required bool withBottomSheet,
 }) async {
-  assert(Country.findByIsoCode(defaultCountry.isoCode) != null);
+  assert(Country.findCountryByIsoCode(defaultCountry.isoCode) != null);
 
   return await showModalBottomSheet<Country>(
       context: context,

@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _updateCountry(Country country) {
     selectedCountry = country;
-    countryCode = "+${country.dialingCode}";
+    countryCode = country.dialingCode;
     setState(() {});
   }
 
@@ -84,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     '9876541230',
                     style: TextStyle(fontSize: 20),
                   ),
-                ]))
+                ])),
           ],
         ),
       ),
