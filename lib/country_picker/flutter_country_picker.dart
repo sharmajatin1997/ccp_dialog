@@ -50,7 +50,7 @@ class CountryPicker extends StatelessWidget {
     bool showFlagAsset = showFlag;
     bool showFlagCircleAsset = showFlagCircle;
     return dense
-        ? _renderDenseDisplay(context, displayCountry, showFlagAsset,showFlagCircle)
+        ? _renderDenseDisplay(context, displayCountry, showFlagAsset,showFlagCircleAsset)
         : _renderDefaultDisplay(context, displayCountry);
   }
 
@@ -63,6 +63,12 @@ class CountryPicker extends StatelessWidget {
             Text(
               displayCountry.asset,
               style: const TextStyle(fontSize: 32),
+            ),
+
+          if (showFlagCircle)
+            Padding(
+              padding: const EdgeInsets.all(9),
+              child: Image.asset(displayCountry.assetCircleFlag, package: 'ccp_dialog',),
             ),
           if (isNationality)
             Text(
@@ -78,7 +84,7 @@ class CountryPicker extends StatelessWidget {
             ),
           if (showDialingCode)
             Text(
-              " ${displayCountry.dialingCode}",
+              !showLine?"${displayCountry.dialingCode} ":displayCountry.dialingCode,
               style: dialingCodeTextStyle,
             ),
           if (showCurrency)
@@ -93,7 +99,7 @@ class CountryPicker extends StatelessWidget {
             ),
           if (showLine)
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 6),
+              margin: const EdgeInsets.symmetric(horizontal: 5),
               width: 0.5,
               height: double.infinity,
               color: Colors.grey.withOpacity(0.5),

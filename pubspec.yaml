@@ -1,6 +1,6 @@
 name: ccp_dialog
 description: CCP Dialog package for showing a country code, flag , currency and currencyISO in Dialog and Bottom sheet.
-version: 0.0.9
+version: 1.0.0
 homepage: https://github.com/sharmajatin1997/ccp_dialog
 
 environment:

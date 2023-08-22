@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   CountryPicker(
                       selectedCountry: selectedCountry,
-                      dense: true,
+                      dense: false,
                       //displays arrow, true by default
                       showLine: false,
                       //displays line, false by default If dense true Line not show
