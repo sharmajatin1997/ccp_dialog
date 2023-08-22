@@ -101,6 +101,8 @@ class _MyHomePageState extends State<MyHomePage> {
                        //displays line, false by default If dense true Line not show
                       showFlag: false,
                        //displays flag, true by default
+                         showFlagCircle: true,
+                       //displays flagCircle, false by default
                       dialingCodeTextStyle:const TextStyle(fontSize: 18),
                       showDialingCode: true,
                       //displays dialing code, false by default
@@ -143,7 +145,8 @@ Example:-
   () => CountryPicker(
   selectedCountry: _controller.selectedCountry.value,
   dense: false,
-  showFlag: true,
+  showFlag: false,
+  showFlagCircle: true,
   showDialingCode: true,                                      
   showName: false,
   showCurrency: false,                                         

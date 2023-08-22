@@ -1,3 +1,3 @@
-## 0.0.8
+## 0.0.9
 
-* Bug Fixes and Add 2 methods to find Default Country using countryCode or isoCode.
+* Bug Fixes and Circle icon of flag added.
