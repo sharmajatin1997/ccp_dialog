@@ -31,8 +31,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String countryCode = "+91";
-  Country selectedCountry = Country.IN;
+  String countryCode = "+247";
+  Country selectedCountry = Country.AC;
 
   _updateCountry(Country country) {
     selectedCountry = country;
@@ -54,8 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
               'Select Country',
             ),
             Container(
-                height: 45,
-                width: MediaQuery.of(context).size.width / 2,
+                height: 50,
+                width: MediaQuery.of(context).size.width/1.5,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     color: Colors.white),
@@ -68,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       showLine: false,
                       //displays line, false by default If dense true Line not show
                       showFlag: false,
+                      showFlagCircle: true,
                       //displays flag, true by default
                       dialingCodeTextStyle: const TextStyle(fontSize: 18),
                       showDialingCode: true,

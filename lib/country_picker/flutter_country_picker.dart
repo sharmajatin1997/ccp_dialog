@@ -13,6 +13,7 @@ class CountryPicker extends StatelessWidget {
     this.dense = true,
     this.showLine = false,
     this.showFlag = true,
+    this.showFlagCircle = false,
     this.showDialingCode = false,
     this.showName = true,
     this.showCurrency = false,
@@ -30,6 +31,7 @@ class CountryPicker extends StatelessWidget {
   final bool dense;
   final bool withBottomSheet;
   final bool showFlag;
+  final bool showFlagCircle;
   final bool showLine;
   final bool showDialingCode;
   final bool showName;
@@ -46,8 +48,9 @@ class CountryPicker extends StatelessWidget {
     assert(debugCheckHasMaterial(context));
     Country displayCountry = selectedCountry;
     bool showFlagAsset = showFlag;
+    bool showFlagCircleAsset = showFlagCircle;
     return dense
-        ? _renderDenseDisplay(context, displayCountry, showFlagAsset)
+        ? _renderDenseDisplay(context, displayCountry, showFlagAsset,showFlagCircle)
         : _renderDefaultDisplay(context, displayCountry);
   }
 
@@ -108,7 +111,7 @@ class CountryPicker extends StatelessWidget {
   }
 
   _renderDenseDisplay(
-      BuildContext context, Country displayCountry, bool showFlagAsset) {
+      BuildContext context, Country displayCountry, bool showFlagAsset, bool showFlagCircle) {
     return InkWell(
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -118,6 +121,12 @@ class CountryPicker extends StatelessWidget {
               visible: showFlagAsset == true,
               child: Text(displayCountry.asset,
                   style: const TextStyle(fontSize: 24.0))),
+          Visibility(
+              visible: showFlagCircle == true,
+              child:Padding(
+                padding: const EdgeInsets.all(8),
+                child: Image.asset(displayCountry.assetCircleFlag, package: 'ccp_dialog',),
+              )),
           Text(displayCountry.dialingCode, style: dialingCodeTextStyle),
           Icon(Icons.arrow_drop_down,
               color: Theme.of(context).brightness == Brightness.light
