@@ -1,6 +1,6 @@
 name: ccp_dialog
 description: CCP Dialog package for showing a country code, flag , currency and currencyISO in Dialog and Bottom sheet.
-version: 1.0.0
+version: 1.0.2
 homepage: https://github.com/sharmajatin1997/ccp_dialog
 
 environment:
@@ -14,7 +14,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^2.0.3
 
 flutter:
   uses-material-design: true

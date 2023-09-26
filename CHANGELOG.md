@@ -1,3 +1,3 @@
-## 1.0.0
+## 1.0.2
 
-* Bug Fixes and Circle icon of flag added.
+* Bug Fixes.

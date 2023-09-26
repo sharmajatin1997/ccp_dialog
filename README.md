@@ -16,7 +16,7 @@ dart
     ccp_dialog: any
 ```
 
-2. Import the package and use it in your App.
+1. Import the package and use it in your App.
 
 ## Usage Example
 

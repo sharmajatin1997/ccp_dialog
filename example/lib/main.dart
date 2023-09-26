@@ -65,13 +65,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       selectedCountry: selectedCountry,
                       dense: false,
                       //displays arrow, true by default
-                      showLine: false,
+                      showLine: true,
                       //displays line, false by default If dense true Line not show
-                      showFlag: false,
-                      showFlagCircle: true,
+                      showFlag: true,
+                      showFlagCircle: false,
                       //displays flag, true by default
                       dialingCodeTextStyle: const TextStyle(fontSize: 18),
                       showDialingCode: true,
+                      colorArrow: Colors.black,
                       //displays dialing code, false by default
                       showName: false,
                       //displays Name, true by default

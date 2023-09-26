@@ -21,6 +21,7 @@ class CountryPicker extends StatelessWidget {
     this.nameTextStyle,
     this.dialingCodeTextStyle,
     this.currencyTextStyle,
+    this.colorArrow,
     this.currencyISOTextStyle,
     this.isNationality = false,
     this.withBottomSheet = false,
@@ -29,6 +30,7 @@ class CountryPicker extends StatelessWidget {
   final Country selectedCountry;
   final ValueChanged<Country> onChanged;
   final bool dense;
+  final Color? colorArrow;
   final bool withBottomSheet;
   final bool showFlag;
   final bool showFlagCircle;
@@ -135,9 +137,9 @@ class CountryPicker extends StatelessWidget {
               )),
           Text(displayCountry.dialingCode, style: dialingCodeTextStyle),
           Icon(Icons.arrow_drop_down,
-              color: Theme.of(context).brightness == Brightness.light
+              color:  colorArrow ?? (Theme.of(context).brightness == Brightness.light
                   ? Colors.grey.shade700
-                  : Colors.white70),
+                  : Colors.white70)),
         ],
       ),
       onTap: () {
@@ -212,8 +214,8 @@ Future<Country?> showBottomSheet({
 }
 
 class _CountryPickerDialog extends StatefulWidget {
-  bool withBottomSheet;
-  _CountryPickerDialog({
+  final bool withBottomSheet;
+  const _CountryPickerDialog({
     Key? key,
     Country? defaultCountry,
     required this.withBottomSheet,
@@ -316,6 +318,7 @@ class _CountryPickerDialogState extends State<_CountryPickerDialog> {
                                       margin: const EdgeInsets.only(left: 8.0),
                                       child: Text(
                                         country.name,
+
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                       ),
