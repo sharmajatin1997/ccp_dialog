@@ -25,6 +25,7 @@ class CountryPicker extends StatelessWidget {
     this.currencyISOTextStyle,
     this.isNationality = false,
     this.withBottomSheet = false,
+    this.isEnable = false
   }) : super(key: key);
 
   final Country selectedCountry;
@@ -44,6 +45,7 @@ class CountryPicker extends StatelessWidget {
   final TextStyle? currencyTextStyle;
   final TextStyle? currencyISOTextStyle;
   final bool isNationality;
+  final bool? isEnable;
 
   @override
   Widget build(BuildContext context) {
@@ -109,12 +111,14 @@ class CountryPicker extends StatelessWidget {
         ],
       ),
       onTap: () {
+        if(!isEnable){
         if (withBottomSheet) {
           _selectCountryWithBottomSheet(context, displayCountry);
         } else {
           _selectCountry(context, displayCountry);
         }
       },
+      }
     );
   }
 
