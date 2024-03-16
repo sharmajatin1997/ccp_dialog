@@ -252,5 +252,4 @@ class Assets {
   static const String flagZa = 'flag/za.png';
   static const String flagZm = 'flag/zm.png';
   static const String flagZw = 'flag/zw.png';
-
 }

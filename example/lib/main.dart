@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
                 height: 50,
-                width: MediaQuery.of(context).size.width/1.5,
+                width: MediaQuery.of(context).size.width / 1.5,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     color: Colors.white),
@@ -64,6 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   CountryPicker(
                       selectedCountry: selectedCountry,
                       dense: false,
+
                       //displays arrow, true by default
                       showLine: true,
                       //displays line, false by default If dense true Line not show
